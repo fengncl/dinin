@@ -1,13 +1,14 @@
-package com.dinin.core.db.entity;
+package com.ttttt.core.db.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 
 @Schema(description = "餐厅")
 @Entity
 @Data
+@Table(name = "canteen")
 public class Canteen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

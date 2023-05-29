@@ -1,6 +1,7 @@
-package com.dinin.core.db.dao;
+package com.ttttt.core.db.dao;
 
-import com.dinin.core.db.entity.Canteen;
+
+import com.ttttt.core.db.entity.Canteen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CanteenRepository extends JpaRepository<Canteen,Integer> {

@@ -1,8 +1,9 @@
-package com.dinin.core.util;
+package com.ttttt.core.util;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 import java.io.Serializable;
 
 @Data

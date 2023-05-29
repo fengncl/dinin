@@ -1,12 +1,13 @@
-package com.dinin.core.db.entity;
+package com.ttttt.core.db.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Entity
 @Data
 @Schema(description = "用户")
+@Table(name = "user")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

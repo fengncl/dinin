@@ -1,25 +1,13 @@
-server:
-  port: 8080
-knife4j:
-  enable: true
-  production: false
-  setting:
-    language: zh_cn
-    swagger-model-name: 实体类列表
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
-  api-docs:
-    path: /v3/api-docs
-spring:
+quarkus:
+  http:
+    port: 80
   datasource:
-    url: jdbc:mysql://117.50.174.154:64001/dinin
     username: root
-    password: 123456abc
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    password: 1433223abc.
+    jdbc:
+      url: jdbc:mysql://117.50.174.154:60002/dinin
+      driver: com.mysql.cj.jdbc.Driver
+  smallrye-openapi:
+    enable: true
+  swagger-ui:
+    enable: true

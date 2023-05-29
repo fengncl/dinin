@@ -1,4 +1,4 @@
-package com.dinin.core.util;
+package com.ttttt.core.util;
 
 import cn.hutool.core.util.ReUtil;
 

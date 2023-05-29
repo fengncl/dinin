@@ -1,17 +1,17 @@
-/*
+  /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : mysql_8.0
  Source Server Type    : MySQL
- Source Server Version : 80021
- Source Host           : localhost:3306
+ Source Server Version : 80033
+ Source Host           : 117.50.174.154:60002
  Source Schema         : dinin
 
  Target Server Type    : MySQL
- Target Server Version : 80021
+ Target Server Version : 80033
  File Encoding         : 65001
 
- Date: 07/05/2023 23:47:46
+ Date: 28/05/2023 23:13:26
 */
 
 SET NAMES utf8mb4;
@@ -28,12 +28,13 @@ CREATE TABLE `canteen`  (
   `postal_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮政编码',
   `grade` float NULL DEFAULT NULL COMMENT '评分',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of canteen
 -- ----------------------------
 INSERT INTO `canteen` VALUES (1, '老八餐厅', '15697105581', '123456', 0);
+INSERT INTO `canteen` VALUES (2, '三十岁', '15697105534', '420330', 0);
 
 -- ----------------------------
 -- Table structure for comment
@@ -46,11 +47,12 @@ CREATE TABLE `comment`  (
   `content` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '评论内容',
   `grade` float NULL DEFAULT NULL COMMENT '评分不能大于5',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
+INSERT INTO `comment` VALUES (2, 1, 6, 'string', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -62,13 +64,13 @@ CREATE TABLE `user`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '手机号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (3, '傻逼', '2798249595@qq.com', '15697105581');
-INSERT INTO `user` VALUES (5, '傻逼', '279824995@qq.com', '15697105181');
-INSERT INTO `user` VALUES (6, '傻逼', '27982495@qq.com', '15697405181');
+INSERT INTO `user` VALUES (6, 'asdasd', '27982495@qq.com', '15697405181');
+INSERT INTO `user` VALUES (7, 'lih', '14658515@qq.com', '15697456631');
+INSERT INTO `user` VALUES (8, 'shab', '2798249596@qq.com', '15697453321');
 
 SET FOREIGN_KEY_CHECKS = 1;
