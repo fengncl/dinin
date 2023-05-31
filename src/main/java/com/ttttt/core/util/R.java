@@ -7,24 +7,24 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import java.io.Serializable;
 
 @Data
-@Schema(description = "固定响应格式")
+@Schema(description = "Fixed response format")
 @Accessors(chain = true)
 public class R<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * 编码：0表示成功，其他值表示失败
+     * Code: 0 indicates success, other values indicate failure
      */
-    @Schema(description = "编码：200，表示成功，其他值表示失败")
+    @Schema(description = "Code: 200 indicates success, other values indicate failure")
     private int code = 200;
     /**
-     * 消息内容
+     * Message content
      */
-    @Schema(description = "消息内容")
-    private String msg = "请求成功";
+    @Schema(description = "Message content")
+    private String msg = "Request successful";
     /**
-     * 响应数据
+     * Response data
      */
-    @Schema(description = "响应数据")
+    @Schema(description = "Response data")
     private T data;
 
     public R() {
@@ -71,7 +71,7 @@ public class R<T> implements Serializable {
         return this;
     }
 
-    // 构建指定状态码
+    // Build with specified status code
     public static <T> R<T> get(int code, String msg, T data) {
         return new R<>(code, msg, data);
     }

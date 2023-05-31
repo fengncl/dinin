@@ -15,7 +15,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.List;
 import java.util.Optional;
 
-@Tag(name = "用户操作接口")
+@Tag(name = "User Operations API")
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserController {
@@ -26,7 +26,7 @@ public class UserController {
     @Inject
     CommentRepository commentRepository;
 
-    @Operation(summary = "获取单个用户信息")
+    @Operation(summary = "Get user information by ID")
     @GET
     @Path("/{id}")
     public R<User> getUserById(@PathParam("id") Long id) {
@@ -35,60 +35,57 @@ public class UserController {
         }
         Optional<User> user = userRepository.findById(id.intValue());
         if (user.isEmpty()) {
-            return R.error("id不存在");
+            return R.error("ID does not exist");
         }
         return R.ok(user.get());
     }
 
-    @Operation(summary = "获取所有户信息")
+    @Operation(summary = "Get all user information")
     @GET
     @Path("/all")
     public R<List<User>> getUserAll() {
         return R.ok(userRepository.findAll());
     }
 
-    @Operation(summary = "增加用户")
+    @Operation(summary = "Create a new user")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     @Path("/")
     public R createUser(User user) {
         if (ObjUtil.isEmpty(user.getName())) {
-            return R.error("请填写用户名");
+            return R.error("Please provide a username");
         }
         if (user.getName().length() > 50) {
-            return R.error("用户名长度不得大于50");
+            return R.error("Username cannot exceed 50 characters");
         }
         if (!Tool.isValidEmail(user.getEmail())) {
-            return R.error("邮箱格式错误");
+            return R.error("Invalid email format");
         }
         if (!Tool.isValidPhone(user.getPhone())) {
-            return R.error("手机号格式错误");
+            return R.error("Invalid phone number format");
         }
-        User user1 = userRepository.findByEmail(user.getEmail());
-        if (user1 != null) {
-            return R.error("邮箱已绑定账号");
+        User existingUserByEmail = userRepository.findByEmail(user.getEmail());
+        if (existingUserByEmail != null) {
+            return R.error("Email is already associated with an account");
         }
-        User user2 = userRepository.findByPhone(user.getPhone());
-        if (user2 != null) {
-            return R.error("手机号已绑定账号");
+        User existingUserByPhone = userRepository.findByPhone(user.getPhone());
+        if (existingUserByPhone != null) {
+            return R.error("Phone number is already associated with an account");
         }
         user.setId(0);
         userRepository.save(user);
         return R.ok();
     }
 
-    @Operation(summary = "根据id删除用户")
+    @Operation(summary = "Delete a user by ID")
     @DELETE
     @Path("/{id}")
     public R deleteUser(@PathParam("id") Integer id) {
-        //查询用户
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            return R.error("id不存在");
+            return R.error("ID does not exist");
         }
-        //删除餐厅的评论
         commentRepository.deleteAllByUId(id);
-        //删除用户
         userRepository.deleteById(id);
         return R.ok();
     }

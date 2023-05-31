@@ -25,7 +25,7 @@ public class Tool {
      * @return
      */
     public static boolean isValidPhone(String phone) {
-        String phoneRegex = "^1[3-9]\\d{9}$";
+        String phoneRegex = "^0\\d{10}$";
         return ReUtil.isMatch(phoneRegex, phone);
     }
 
@@ -36,7 +36,7 @@ public class Tool {
      * @return
      */
     public static boolean isValid(String postalCode) {
-        Pattern pattern = Pattern.compile("^\\d{6}$");
+        Pattern pattern = Pattern.compile("^0\\d{5}$");
         return pattern.matcher(postalCode).matches();
     }
 

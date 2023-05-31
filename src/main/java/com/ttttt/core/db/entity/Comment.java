@@ -10,24 +10,29 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    @Schema(description = "id")
+    @Schema(description = "ID")
     private int id;
+
     @Basic
     @Column(name = "c_id", nullable = false)
-    @Schema(description = "餐厅id")
+    @Schema(description = "Canteen ID")
     private Integer cId;
+
     @Basic
     @Column(name = "u_id", nullable = true)
-    @Schema(description = "用户id")
+    @Schema(description = "User ID")
     private Integer uId;
+
     @Basic
     @Column(name = "content", nullable = true, length = 300)
-    @Schema(description = "评论内容")
+    @Schema(description = "Comment content")
     private String content;
+
     @Basic
     @Column(name = "grade", nullable = true, precision = 0)
-    @Schema(description = "评分")
+    @Schema(description = "Rating")
     private Double grade;
+
 
     public int getId() {
         return id;

@@ -13,44 +13,44 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
-@Tag(name = "餐厅")
+@Tag(name = "restaurant")
 @Path("/canteen")
 @Produces(MediaType.APPLICATION_JSON)
-public class CanteenController {
+public class RestaurantController {
     @Inject
     CanteenRepository canteenRepository;
 
     @GET
     @Path("/all")
-    @Operation(summary = "查询所有餐厅")
+    @Operation(summary = "Check all restaurants")
     public R<List<Canteen>> getCanteenAll() {
         return R.ok(canteenRepository.findAll());
     }
 
     @Path("/")
     @POST
-    @Operation(summary = "添加餐厅")
+    @Operation(summary = "Add a restaurant")
     @Consumes(MediaType.APPLICATION_JSON)
     public R createCanteen(Canteen canteen) {
         if (ObjUtil.isEmpty(canteen.getName())) {
-            return R.error("请填写餐厅名");
+            return R.error("Please fill in the restaurant name");
         }
         if (!Tool.isValidPhone(canteen.getPhone())) {
-            return R.error("手机号格式错误");
+            return R.error("The format of the mobile phone number is incorrect");
         }
         if (canteen.getName().length() > 50) {
-            return R.error("餐厅名长度不能超过五十");
+            return R.error("The name of the restaurant must be no longer than 50");
         }
         if (!Tool.isValid(canteen.getPostalCode())) {
-            return R.error("邮编格式错误");
+            return R.error("Incorrect postcode format");
         }
         Canteen canteen1 = canteenRepository.findByPhone(canteen.getPhone());
         if (canteen1 != null) {
-            return R.error("手机号已绑定餐厅");
+            return R.error("The phone number has been bound to the restaurant");
         }
         canteen.setId(0);
         canteenRepository.save(canteen);
-        return R.ok("添加成功");
+        return R.ok("successfully added");
     }
 
 

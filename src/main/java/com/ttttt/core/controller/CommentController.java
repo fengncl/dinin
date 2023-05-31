@@ -17,7 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.List;
 import java.util.Optional;
 
-@Tag(name = "评论")
+@Tag(name = "Comments")
 @Path("/comment")
 @Produces(MediaType.APPLICATION_JSON)
 public class CommentController {
@@ -31,50 +31,47 @@ public class CommentController {
     UserRepository userRepository;
 
 
-    @Operation(summary = "评论餐厅")
+    @Operation(summary = "Comment on a canteen")
     @POST
     @Path("/")
-    //接口返回的数据是json
     @Consumes(MediaType.APPLICATION_JSON)
     public R createComment(Comment comment) {
         if (ObjUtil.isEmpty(comment.getContent())) {
-            return R.error("请填写评论");
+            return R.error("Please fill in the comment");
         }
         if (comment.getContent().length() > 300) {
-            return R.error("评论长度不能大于300");
+            return R.error("Comment length cannot exceed 300 characters");
         }
         if (ObjUtil.isEmpty(comment.getGrade())) {
-            return R.error("请填写评分");
+            return R.error("Please provide a rating");
         }
         if (comment.getGrade() < 0) {
-            return R.error("评分不能小于0");
+            return R.error("Rating cannot be less than 0");
         }
         if (comment.getGrade() > 5) {
-            return R.error("评分不能大于5");
+            return R.error("Rating cannot be greater than 5");
         }
         Optional<Canteen> canteen = canteenRepository.findById(comment.getcId());
         if (canteen.isEmpty()) {
-            return R.error("餐厅id不存在");
+            return R.error("Canteen ID does not exist");
         }
         Optional<User> user = userRepository.findById(comment.getuId());
         if (user.isEmpty()) {
-            return R.error("用户id不存在");
+            return R.error("User ID does not exist");
         }
-        Comment comment2 = commentRepository.findByCIdAndUId(comment.getcId(), comment.getuId());
-        if (comment2 != null) {
-            return R.error("已经在本餐厅评论过了");
+        Comment existingComment = commentRepository.findByCIdAndUId(comment.getcId(), comment.getuId());
+        if (existingComment != null) {
+            return R.error("Already commented on this canteen");
         }
         comment.setId(0);
         commentRepository.save(comment);
-        return R.ok("评论成功");
+        return R.ok("Comment added successfully");
     }
 
-    @Operation(summary = "根据用户的id查询所有评论")
+    @Operation(summary = "Get all comments by user ID")
     @GET
     @Path("/all")
     public R<List<Comment>> getComments(Integer uid) {
         return R.ok(commentRepository.findByUId(uid));
     }
-
-
 }
