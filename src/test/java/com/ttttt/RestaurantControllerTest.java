@@ -14,12 +14,14 @@ public class RestaurantControllerTest {
     @DisplayName("Get All Canteens Test")
     public void testGetCanteenAll() {
         given()
-                .contentType(ContentType.JSON)
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .when()
                 .get("/canteen/all")
                 .then()
                 .statusCode(200)
-                .body("data", hasSize(greaterThanOrEqualTo(0)));
+                .body("code", equalTo(200));
     }
 
     @Test
@@ -32,13 +34,15 @@ public class RestaurantControllerTest {
         canteen.setPostalCode("12345");
 
         given()
-                .contentType(ContentType.JSON)
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .body(canteen)
                 .when()
                 .post("/canteen")
                 .then()
                 .statusCode(200)
-                .body("message", equalTo("successfully added"));
+                .body("code", equalTo(200));
     }
 
 }

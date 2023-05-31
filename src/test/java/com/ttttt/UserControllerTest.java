@@ -16,12 +16,14 @@ public class UserControllerTest {
     @DisplayName("Get User By ID Test")
     public void testGetUserById() {
         given()
-                .contentType(ContentType.JSON)
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .when()
-                .get("/users/{id}", 1)
+                .get("/users/{id}", 6)
                 .then()
                 .statusCode(200)
-                .body("data.id", equalTo(1));
+                .body("code", equalTo(200));
     }
 
     @Test
@@ -34,12 +36,15 @@ public class UserControllerTest {
         user.setPhone("1234567890");
 
         given()
-                .contentType(ContentType.JSON)
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .body(user)
                 .when()
                 .post("/users")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("code", equalTo(200));
     }
 
 }

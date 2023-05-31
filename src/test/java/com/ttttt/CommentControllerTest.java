@@ -18,32 +18,37 @@ public class CommentControllerTest {
         Comment comment = new Comment();
         // 设置comment对象的属性值
         comment.setcId(1);
-        comment.setuId(1);
+        comment.setuId(6);
         comment.setContent("This is a comment");
         comment.setGrade(4.5);
 
         given()
-                .contentType(ContentType.JSON)
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .body(comment)
                 .when()
-                .post("/comment")
+                .post("/comment/")
                 .then()
                 .statusCode(200)
-                .body("message", equalTo("Comment added successfully"));
+                .body("msg", equalTo("Request successful"));
     }
 
     @Test
     @DisplayName("Get Comments Test")
     public void testGetComments() {
-        Integer userId = 1;
+        Integer userId = 6;
 
         given()
+                .port(80)
+                .contentType("application/json")
+                .accept("application/json")
                 .queryParam("uid", userId)
                 .when()
                 .get("/comment/all")
                 .then()
                 .statusCode(200)
-                .body("data", hasSize(greaterThanOrEqualTo(0)));
+                .body("msg", equalTo("Request successful"));
     }
 
 

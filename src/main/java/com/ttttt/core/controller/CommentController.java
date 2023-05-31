@@ -65,7 +65,7 @@ public class CommentController {
         }
         comment.setId(0);
         commentRepository.save(comment);
-        return R.ok("Comment added successfully");
+        return R.ok();
     }
 
     @Operation(summary = "Get all comments by user ID")
